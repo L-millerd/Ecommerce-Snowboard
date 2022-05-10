@@ -1,0 +1,113 @@
+body{
+  font-family: 'Roboto', sans-serif;
+}
+.hero{
+  width: 100%;
+  height: 700px;
+  //background-image: url("../assets/butter_snowboards_hero.jpg");
+  background-color:lightgrey;
+  background-position: right;
+  background-size: cover;
+  background-attachment: scroll;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+h1{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 3em;
+  text-align: center;
+  padding: 2em 0px 2em 0px;
+}
+
+.allContainer{
+  max-width: 100%;
+}
+.productContainer{
+  max-width: 100%;
+  //max-width: 1500px;
+  padding-bottom: 10em;
+  padding-left: 4em;
+  padding-right: 4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //position: relative;
+
+  .productImg{
+    width: 90%;
+    margin: auto;
+  }
+
+
+  .productContent{
+    max-width: 600px;
+
+    .title{
+      font-family: 'Roboto', sans-serif;
+      font-weight: 900;
+      font-size: 1.6em;
+      padding-top: 1em;
+    }
+
+    .description{
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      font-size: 1.2em;
+    }
+
+    .price{
+      font-family: 'Roboto', sans-serif;
+      font-weight: 600;
+      font-size: 1.4em;
+
+    }
+
+    .btnRow{
+      width: 70%;
+      padding-top: 2em;
+    }
+
+    .heart{
+      background-color: grey;
+    }
+
+    .addBtn{
+      width: 225px;
+      padding: 12px 0px 12px 0px;
+      color:white;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 600;
+      text-decoration: none;
+      //text-align: center;
+      font-size: 1em;
+      font-weight: bold;
+      background-color: #836063;
+      border: none;
+    }
+
+    .addBtn:hover{
+      opacity: 0.8;
+      transition-duration: .2s;
+    }
+
+  }
+
+
+}
+
+
+.footerClass{
+  min-height: 200px;
+  background-color: black;
+  margin-top: 50px;
+}
+
+.stock{
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+}

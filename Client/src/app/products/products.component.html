@@ -1,0 +1,22 @@
+<div class="hero" [ngStyle]="{backgroundImage:'url(../assets/butter_snowboards_hero.jpg)'}">
+</div>
+
+<div class="allContainer">
+
+  <div class="productRow row">
+    <div class="productCol col-4" *ngFor="let item of womens">
+      <img class="productImg" [src]="item.image">
+      <h4 class="title">{{item.title}}</h4>
+      <div class="price">{{item.price | currency}}</div>
+      <div class="stock">{{item.stock}} Available</div>
+      <div class="btnRow row">
+        <!-- <div class="heart col-3"></div> -->
+        <a [routerLink]="['/womens', item.id]"><button class="addBtn col-9">View</button></a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="footerClass">
+  </div>
+</div>
