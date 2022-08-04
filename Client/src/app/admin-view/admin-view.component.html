@@ -1,0 +1,54 @@
+
+<div class="allContainer">
+
+
+  <div class="heading">Products Admin</div>
+  <a [routerLink]="['/admin-add']"><button class="btn btn-primary">Add Product</button></a>
+
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Primary Image</th>
+        <th scope="col" >Title</th>
+        <!-- <th scope="col">Image 2</th>
+        <th scope="col">Image 3</th>
+        <th scope="col">Image 4</th>
+        <th scope="col">Image 5</th> -->
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Live</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody class="table-striped">
+      <tr *ngFor="let item of products">
+        <th scope="row" ><img class="image" [src] = "item.image"></th>
+        <td class="title">{{item.title}}</td>
+        <td>{{item.description}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.stock}}</td>
+        <td>
+          <div class="form-check form-switch">
+
+            <div *ngIf="item.online == 1" class="form-check form-switch">
+              <input  class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked (click)="toggleLive(item.id)">
+              <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+            </div>
+
+            <div *ngIf="item.online == 0"  class="form-check form-switch" >
+              <input *ngIf="item.online == 0" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" (click)="toggleLive(item.id)">
+              <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+            </div>
+
+            <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+          </div>
+        </td>
+        <td><a [routerLink]="['/admin-edit', item.id]"><button class="btn btn-primary col-9">Edit</button></a></td>
+      </tr>
+      <tr>
+    </tbody>
+  </table>
+
+
+</div>

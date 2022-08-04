@@ -1,0 +1,16 @@
+
+<div class="container center mt-5">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" [(ngModel)]="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input [(ngModel)]="password" type="password" class="form-control" id="exampleInputPassword1">
+  </div>
+
+
+  <button class="btn btn-primary" (click) = "login()">Login</button>
+  <div  *ngIf="!loginStatus" [style.display]="showMessage">Your login credentials are incorrect</div>
+</div>

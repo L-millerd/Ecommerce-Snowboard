@@ -14,8 +14,6 @@ export class ProductDetailsComponent implements OnInit {
 
   womens:Product[]=[];
 
-  imagesArray:any[]=[];
-
   constructor(private route: ActivatedRoute, private ps:ProductserviceService) { }
 
 
@@ -24,17 +22,8 @@ export class ProductDetailsComponent implements OnInit {
 
     this.ps.getProductById(id).subscribe( singleProduct =>  {
       this.singleProduct = singleProduct;
-      // console.log(this.singleProduct)
+     console.log(this.singleProduct)
     });
-
-    this.ps.getAllProducts().subscribe( womens => {
-      this.womens = womens;
-      console.log(womens);
-    })
-
-
-    this.imagesArray.push(this.singleProduct.image, this.singleProduct.image2, this.singleProduct.image3);
-
 
 
   }

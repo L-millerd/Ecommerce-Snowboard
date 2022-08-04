@@ -6,7 +6,8 @@ export interface Product{
   image4: string;
   image5: string;
   title: string;
-  description: number;
+  description: string;
   price: number;
   stock: number;
+  online: any;
 }

@@ -1,13 +1,22 @@
 import express from 'express';
 import cors from 'cors';
-import mysql from 'mysql';
+import mysql from 'mysql2';
+import 'dotenv/config';
+
+// const db = mysql.createConnection({
+//     host: 'localhost',
+//     port: 3306,
+//     user: 'root',
+//     password: '',
+//     database: 'snowboards'
+// });
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: '',
-    database: 'snowboards'
+    host: process.env.DBHOST,
+    port: process.env.DBPORT,
+    user: process.env.DBUSER,
+    password: process.env.DBPASSWORD,
+    database: process.env.DBDATABASE
 });
 
 const server = express();
@@ -28,13 +37,13 @@ db.connect(error =>{
 })
 
 server.get('/womens', (req, res) => {
-    let sbData = "SELECT * FROM snowboards";
-    let query = db.query(sbData, (error, data) => {
+    let query = "CALL `viewProducts`";
+    db.query(query, (error, data) => {
         if (error){
             res.json ({ErrorMessage:error});
         }
         else {
-            res.json(data);
+            res.json(data[0]);
             // console.log(data);
         }
     })
@@ -42,9 +51,9 @@ server.get('/womens', (req, res) => {
 
 server.get('/womens/:productid', (req, res) =>{
     let id_from_client = req.params.productid;
-    let sbData = "SELECT * FROM snowboards";
+    let query = "SELECT * FROM snowboards";
     
-    let query = db.query(sbData, (error, data) => {
+    db.query(query, (error, data) => {
         if (error){
             res.json ({ErrorMessage:error});
         }
@@ -56,51 +65,123 @@ server.get('/womens/:productid', (req, res) =>{
     
 })
 
-// server.get('/womens', (req, res) => {
-//     res.send(productsJson);
-// })
+server.post('/login', (req, res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+    let loginQuery = 'CALL `login`(?, ?)';
+    db.query(loginQuery, [email, password], (error, data, fields) => {
+      if(error){
+        res.json({ ErrorMessage: error});
+      }
+      else{
+        if(data[0].length === 0){
+          res.json({ data: data[0], login: false, message: "invalid credentials"})
+        }
+        else{
+          res.json({ 
+              adminID: data[0].UserID, 
+              email: data[0].email,
+              data: data[0],
+              login: true, 
+              message: "Login successful"});
+              //create auth key 
+        }   
+      }
+    })
+  })
 
-// server.get('/womens/:productid', (req, res) =>{
-//     let id_from_client = req.params.productid;
-//     res.json(productsJson.find(x => x.id == id_from_client))
-// })
+  server.get('/admin-view', (req, res) =>{
+      let sbData = "SELECT * FROM snowboards";
+      db.query(sbData, (error, data) =>{
+          if(error){
+              res.json({ErrorMessage: error})
+          }
+          else{
+              res.json(data);
+          }
+      })
+  })
 
-// let productsJson = [
-//     {
-//         id: 1,
-//         image: "../assets/saloman1.jpg",
-//         image2: "../assets/saloman2.jpg",
-//         image3: "../assets/saloman3.jpg",
-//         image4: "../assets/saloman4.jpg",
-//         image5: "../assets/saloman5.jpg",
-//         title: "Salomon Wonder Snowboard - Women's 2022",
-//         description: "One of Salomon's most versatile boards, the Wonder is designed for maximum performance and playfulness on all terrains, in all conditions. An advanced directional twin shape is built for switch riding, with lengthened contact points for soft snow performance that won't affect handling on groomers.",
-//         price: 479.99,
-//         stock: 10,
-//     },
-//     {
-//         id: 2,
-//         image: "../assets/burton1.jpg",
-//         image2: "../assets/burton2.jpg",
-//         image3: "../assets/burton3.jpg",
-//         image4: "../assets/burton4.jpg",
-//         image5: "../assets/burton5.jpg",
-//         title: "Women’s Burton Feelgood Camber Snowboard",
-//         description: "Backed by Kelly Clark, the women’s Burton Feelgood Snowboard has been the defining force in women’s snowboarding for two decades. The Feelgood boasts a unique shape, matched with positively powerful pop for Ferrari-like handing.",
-//         price: 629.99,
-//         stock: 5,
-//     },
-//     {
-//         id: 3,
-//         image: "../assets/assassin1.jpg",
-//         image2: "../assets/assassin2.jpg",
-//         image3: "../assets/assassin3.jpg",
-//         image4: "../assets/assassin4.jpg",
-//         image5: "../assets/assassin5.jpg",
-//         title: "Women’s Salomon Lotus Snowboard",
-//         description: "Like a friend who waits for you to get up and clean off your goggles on a powder day, the Salomon Lotus Snowboard has that rare combination of trusty performance and easygoing likeability you need to take your riding to the next level. A directional twin with a 10mm setback for stability at speed and float in the deep stuff, the Lotus features a classic single radius sidecut and a forgiving Flat Out Camber profile.",
-//         price: 549.99,
-//         stock: 3,
-//     }
-// ]
+  server.post('/admin-add', (req, res) =>{
+      let image = req.body.image;
+      let image2 = req.body.image2;
+      let image3 = req.body.image3;
+      let image4 = req.body.image4;
+      let image5 = req.body.image5;
+      let title = req.body.title;
+      let description = req.body.description;
+      let price = req.body.price;
+      let stock = req.body.stock;
+      let addQuery = "CALL `addProduct`(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      db.query(addQuery, [image, image2, image3, image4, image5, title, description, price, stock], (error, data)=>{
+          if(error){
+              res.json({addProduct: false, message: error});
+          }
+          else{
+              res.json({addProduct: true, message: "Product successfully added"});
+          }
+      })
+  })
 
+  server.get('/admin-edit/:id', (req, res) =>{
+      let productID = req.params.id;
+      let getQuery = "CALL `getProduct`(?)";
+      db.query(getQuery, [productID], (error, data) =>{
+          if(error){
+              res.json(error)
+          }
+          else{
+              res.json(data[0][0]);
+          }
+      })
+  })
+
+///doesn't work
+  server.put('/admin-update/:id', (req, res) =>{
+      let productID = req.params.id;
+      let image = req.body.image;
+      let image2 = req.body.image2;
+      let image3 = req.body.image3;
+      let image4 = req.body.image4;
+      let image5 = req.body.image5;
+      let title = req.body.title;
+      let description = req.body.description;
+      let price = req.body.price;
+      let stock = req.body.stock;
+      let editQuery = "CALL `editProduct`(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    db.query(editQuery, [productID, image, image2, image3, image4, image5, title, description, price, stock], (error)=>{
+        if(error){
+            res.json({edited:false, message: error});
+        }
+        else{
+            res.json({edited: true, message: "Successfully Updated"});
+        }
+    })
+  })
+
+  server.delete('/admin-delete/:id', (req, res) =>{
+      let productID = req.params.id;
+      let deleteQuery = "CALL `deleteProduct`(?)";
+      db.query(deleteQuery, [productID], (error) => {
+        if(error){
+            res.json({deleted: false, message: error});
+        }
+        else{
+            res.json({deleted: true, message: "Successfully Deleted"});
+        }
+      })
+  })
+
+  server.put('/admin-toggle/:id', (req, res) =>{
+      let productID = req.params.id;
+      let toggleQuery = "CALL `toggleLive`(?)";
+      db.query(toggleQuery, productID, (error)=>{
+          if(error){
+              res.json({toggled: false, message: error});
+          }
+          else{
+              res.json({toggled: true, message: "Successfully Toggled"});
+          }
+      })
+  })
+  

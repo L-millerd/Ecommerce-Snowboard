@@ -1,3 +1,5 @@
+@url = http://localhost:4400
+
 GET http://localhost:4400
 
 ### 
@@ -7,3 +9,58 @@ GET http://localhost:4400/womens
 ###
 
 GET http://localhost:4400/womens/2
+
+###
+
+POST http://localhost:4400/login
+Content-Type: application/json
+
+{
+    "email": "lisa.millerd@gmail.com",
+    "password": "1234"
+}
+
+###
+GET http://localhost:4400/admin-view
+
+###
+
+POST {{url}}/admin-add
+Content-Type: application/json
+
+    {
+    "image": "test from server",
+    "image2": "test",
+    "image3": "string",
+    "image4": "string",
+    "image5": "string",
+    "title": "string", 
+    "description": "string",
+    "price": 22,
+    "stock": 0
+    }
+
+###
+GET {{url}}/admin-edit/2
+
+###
+PUT {{url}}/admin-update/26
+Content-Type: application/json
+
+{
+    "image": "update from server",
+    "image2": "test",
+    "image3": "string",
+    "image4": "string",
+    "image5": "string",
+    "title": "string", 
+    "description": "string",
+    "price": 22,
+    "stock": 0
+}
+
+###
+DELETE {{url}}/admin-delete/20
+
+###
+PUT {{url}}/admin-toggle/26
