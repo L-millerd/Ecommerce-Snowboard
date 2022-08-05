@@ -19,11 +19,11 @@ const db = mysql.createConnection({
     database: process.env.DBDATABASE
 });
 
+const server = express();
+
 server.use(express.json())
 
 server.use(cors());
-
-const server = express();
 
 server.listen(4400, function(){
     console.log('server is successfully running on port 4400')
