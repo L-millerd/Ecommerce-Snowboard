@@ -21,7 +21,7 @@ const db = mysql.createConnection({
 
 const server = express();
 
-server.use(express.json())
+server.use(express.json());
 
 server.use(cors());
 
