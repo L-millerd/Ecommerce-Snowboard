@@ -21,11 +21,11 @@ export class AdminViewComponent implements OnInit {
   constructor(private as:AdminserviceService) { }
 
   toggleLive(productID:number){
-
     this.as.toggleLive(productID).subscribe( response =>{
       console.log(response);
     })
   }
+
 
   ngOnInit(): void {
     this.as.displayProducts().subscribe( products =>{

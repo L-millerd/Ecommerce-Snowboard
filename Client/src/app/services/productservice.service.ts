@@ -20,5 +20,4 @@ export class ProductserviceService {
     return this.http.get<Product>(this.url + '/' + id);
   }
 
-
 }

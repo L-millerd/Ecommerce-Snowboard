@@ -11,7 +11,7 @@ import 'dotenv/config';
 //     database: 'snowboards'
 // });
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host: process.env.DBHOST,
     port: process.env.DBPORT,
     user: process.env.DBUSER,
@@ -25,17 +25,18 @@ server.use(express.json());
 
 server.use(cors());
 
+//change to 4400
 server.listen(4400, function(){
     console.log('server is successfully running on port 4400')
 });
 
 
-db.connect(error =>{
-    if(error)
-        console.log("sorry, cannot connect to db", error);
-    else
-        console.log("connected to mysql db");
-})
+// db.connect(error =>{
+//     if(error)
+//         console.log("sorry, cannot connect to db", error);
+//     else
+//         console.log("connected to mysql db");
+// })
 
 server.get('/womens', (req, res) => {
     let query = "CALL `viewProducts`";

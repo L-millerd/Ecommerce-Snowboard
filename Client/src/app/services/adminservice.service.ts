@@ -76,4 +76,6 @@ export class AdminserviceService {
     }
     return this.http.put<any>(this.toggleURL + "/" + id, toggleBody);
   }
+
+
 }
