@@ -1,4 +1,6 @@
 @url = http://localhost:4400
+@url2 = https://starfish-app-m7u82.ondigitalocean.app
+
 
 GET http://localhost:4400
 
@@ -25,7 +27,7 @@ GET http://localhost:4400/admin-view
 
 ###
 
-POST {{url}}/admin-add
+POST {{{{url2}}}}/admin-add
 Content-Type: application/json
 
     {
@@ -55,6 +57,17 @@ Content-Type: application/json
     "image5": "string",
     "title": "string", 
     "description": "string",
+    "price": 22,
+    "stock": 0
+}
+###
+
+PUT {{url}}/admin-revert/27
+Content-Type: application/json
+
+{
+    "title": "server test2", 
+    "description": "server test2",
     "price": 22,
     "stock": 0
 }

@@ -7,7 +7,6 @@ import { Login } from '../interfaces/login.interface'
   providedIn: 'root'
 })
 export class AdminserviceService {
-
   private loginURL = "http://localhost:4400/login";
   private viewURL = "http://localhost:4400/admin-view";
   private addURL = "http://localhost:4400/admin-add";

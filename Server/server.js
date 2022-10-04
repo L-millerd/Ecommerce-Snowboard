@@ -25,7 +25,6 @@ server.use(express.json());
 
 server.use(cors());
 
-
 server.listen(4400, function(){
     console.log('server is successfully running on port 4400')
 });
@@ -46,7 +45,6 @@ server.get('/womens', (req, res) => {
         }
         else {
             res.json(data[0]);
-            // console.log(data);
         }
     })
 })
@@ -138,7 +136,7 @@ server.post('/login', (req, res) => {
       })
   })
 
-///doesn't work
+
   server.put('/admin-update/:id', (req, res) =>{
       let productID = req.params.id;
       let image = req.body.image;
@@ -185,5 +183,23 @@ server.post('/login', (req, res) => {
               res.json({toggled: true, message: "Successfully Toggled"});
           }
       })
+  })
+
+  /////revert
+  server.put('/admin-revert/:id', (req, res) =>{
+    let productID = req.params.id;
+    let title = req.body.title;
+    let description = req.body.description;
+    let price = req.body.price;
+    let stock = req.body.stock;
+    let revertQuery = "CALL `revertProduct`(?, ?, ?, ?, ?);";
+    db.query(revertQuery, [productID, title, description, price, stock], (error) => {
+        if(error){
+            res.json({reverted: false, message: error});
+        }
+        else{
+            res.json({reverted: true, message: "Successfully reverted"})
+        }
+    })
   })
   
