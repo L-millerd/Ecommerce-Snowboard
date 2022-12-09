@@ -23,11 +23,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:4400/admin-view
+GET {{url2}}/admin-view
 
 ###
 
-POST {{{{url2}}}}/admin-add
+POST {{url2}}/admin-add
 Content-Type: application/json
 
     {
@@ -62,12 +62,12 @@ Content-Type: application/json
 }
 ###
 
-PUT {{url}}/admin-revert/27
+PUT {{url2}}/admin-revert/28
 Content-Type: application/json
 
 {
-    "title": "server test2", 
-    "description": "server test2",
+    "title": "revert test2", 
+    "description": "revert test",
     "price": 22,
     "stock": 0
 }
