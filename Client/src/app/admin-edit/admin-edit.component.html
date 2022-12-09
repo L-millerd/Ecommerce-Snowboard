@@ -1,54 +1,54 @@
 
-<div class="container center mt-5">
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Title</label>
-    <input [(ngModel)]="title" type="text" class="form-control" placeholder="Product Title" >
-  </div>
+<div class="pageContainer">
 
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Primary Image</label>
-    <input type="text" [(ngModel)]="image" class="form-control" placeholder="Primary image path" >
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Image 2</label>
-    <input [(ngModel)]="image2" type="text" class="form-control" placeholder="image path" >
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Image 3</label>
-    <input [(ngModel)]="image3" type="text" class="form-control" placeholder="image path" >
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Image 4</label>
-    <input [(ngModel)]="image4" type="text" class="form-control" placeholder="image path" >
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Image 5</label>
-    <input [(ngModel)]="image5" type="text" class="form-control" placeholder="image path" >
-  </div>
+  <div class="editContainer mt-5 center">
 
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Description</label>
-    <input [(ngModel)]="description" type="text" class="form-control" placeholder="Product description" >
+    <div class="topLinks">
+      <a class="back" routerLink="../../admin-view"><i class="fa-solid fa-arrow-left"></i> Back to <span style="font-weight:bold">Admin Portal</span></a>
+      <!-- <div class="revert" (click)="revertProduct()"><i class="fa-solid fa-clock-rotate-left"></i> Revert Changes</div> -->
+    </div>
+
+
+    <div class="heading">
+      <h1>Currently Editing </h1>
+      <div class="title"> {{title}} </div>
+    </div>
+
+
+    <div class="mt-3 mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input [(ngModel)]="title" id="title" type="text" class="form-control" placeholder="Product Title" >
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea [(ngModel)]="description" class="form-control" id="description" rows="4"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input [(ngModel)]="price" id="price" type="text" class="form-control" placeholder="Numeric price only" >
+    </div>
+    <div class="mb-3">
+      <label for="stock" class="form-label">Stock</label>
+      <input [(ngModel)]="stock" type="text" id="stock" class="form-control" placeholder="Current stock" >
+    </div>
+
+    <div class="submitButtons">
+      <button class="btn btn-primary buttonClass" (click) = "editProduct()">Update</button>
+      <button class="btn btn-primary buttonClass" (click) = "deleteProduct()" disabled>Delete</button>
+    </div>
+
+    <div class="messages">
+      <div  *ngIf="deleted" [style.display]="showDeleteMessage" class="success"><i class="fa-solid fa-circle-check"></i>Successfully Deleted</div>
+      <div  *ngIf="!deleted" [style.display]="showDeleteMessage" class="error"><i class="fa-solid fa-circle-xmark"></i>There's been an error</div>
+
+      <div  *ngIf="edited" [style.display]="showEditMessage" class="success"><i class="fa-solid fa-circle-check"></i>Successfully Updated</div>
+      <div  *ngIf="!edited" [style.display]="showEditMessage" class="error"><i class="fa-solid fa-circle-check"></i>There's been an error</div>
+
+      <!-- <div  *ngIf="reverted" [style.display]="showRevertedMessage" class="success"><i class="fa-solid fa-circle-check"></i>Successfully Reverted</div>
+      <div  *ngIf="!reverted" [style.display]="showRevertedMessage" class="error"><i class="fa-solid fa-circle-check"></i>There's been an error</div> -->
+    </div>
+
+
   </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Price</label>
-    <input [(ngModel)]="price" type="text" class="form-control" placeholder="Numeric price only" >
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Stock</label>
-    <input [(ngModel)]="stock" type="text" class="form-control" placeholder="Current stock" >
-  </div>
-
-  <button class="btn btn-primary" (click) = "editProduct()">Update Product</button>
-  <button class="btn btn-primary" (click) = "deleteProduct()">Delete Product</button>
-
-  <a routerLink="/admin-view">Return to admin products page</a>
-  <!-- <div  *ngIf="deleted" class="success">**Successfully Added</div>
-  <div  *ngIf="!deleted" class="error">**There's been an error</div> -->
-
-  <div  *ngIf="deleted" [style.display]="showDeleteMessage" class="success">**Successfully Deleted</div>
-  <div  *ngIf="!deleted" [style.display]="showDeleteMessage" class="error">**There's been an error</div>
-
-  <div  *ngIf="edited" [style.display]="showEditMessage" class="success">**Successfully Updated</div>
-  <div  *ngIf="!edited" [style.display]="showEditMessage" class="error">**There's been an error</div>
 </div>

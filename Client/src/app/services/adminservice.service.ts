@@ -7,13 +7,18 @@ import { Login } from '../interfaces/login.interface'
   providedIn: 'root'
 })
 export class AdminserviceService {
-  private loginURL = "http://localhost:4400/login";
-  private viewURL = "http://localhost:4400/admin-view";
-  private addURL = "http://localhost:4400/admin-add";
-  private editURL = "http://localhost:4400/admin-edit";
-  private deleteURL = "http://localhost:4400/admin-delete";
-  private updateURL = "http://localhost:4400/admin-update";
-  private toggleURL = "http://localhost:4400/admin-toggle";
+
+  server = "http://localhost:4400";
+
+  private loginURL = this.server + "/login";
+  private viewURL = this.server +"/admin-view";
+  private addURL = this.server + "/admin-add";
+  private editURL = this.server + "/admin-edit";
+  private deleteURL = this.server + "/admin-delete";
+  private updateURL = this.server + "/admin-update";
+  private toggleURL = this.server + "/admin-toggle";
+  // private revertURL = this.server + "/admin-revert";
+
 
   constructor(private http:HttpClient) { }
 
@@ -75,6 +80,5 @@ export class AdminserviceService {
     }
     return this.http.put<any>(this.toggleURL + "/" + id, toggleBody);
   }
-
 
 }

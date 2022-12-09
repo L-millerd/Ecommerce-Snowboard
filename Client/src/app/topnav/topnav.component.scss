@@ -1,16 +1,52 @@
+.navbar{
+  color: black;
+  font-family: 'Roboto', sans-serif;
+
+}
 .navLogo{
-  max-width: 150px;
-  margin: 10px;
+  max-width: 115px;
+  // margin: 10px;
+}
+
+li{
+  font-size: 0.7rem;
 }
 
 .myNav{
-  font-family: 'Roboto', sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-  color: black;
+  // font-size: 20px;
+  font-weight: 500;
   padding-left: 20px;
 }
 
 .nav-link {
  color: black !important;
+ font-size: 0.7rem;
+}
+
+.nav-icons{
+display: flex;
+gap: 2em;
+font-size: 0.7rem;
+align-items: center;
+}
+
+.navbar-toggler{
+  border:none !important;
+}
+.nav-info{
+  text-align: center;
+  padding: .3rem;
+  background-color: black;
+  color: white;
+  font-size: 0.5rem;
+}
+
+.disabled{
+  color: grey !important;
+}
+
+@media screen and (max-width:767px){
+    .nav-info{
+      display: none;
+    }
 }

@@ -13,10 +13,32 @@ export class ProductsComponent implements OnInit {
 
   constructor(private ps:ProductserviceService) { }
 
-  ngOnInit(): void {
+  lowHigh(){
+    this.womens.sort(function(a,b){
+      return a.price - b.price;
+    })
+  }
+
+  highLow(){
+    this.womens.sort(function(a,b){
+      return b.price - a.price;
+    })
+  }
+
+  available(){
+    this.womens = this.womens.filter(product =>{
+      return product.stock >= 1;
+    })
+
+  }
+
+  allProducts(){
     this.ps.getAllProducts().subscribe( womens => {
       this.womens = womens;
     })
+  }
+  ngOnInit(): void {
+    this.allProducts();
   }
 
 }

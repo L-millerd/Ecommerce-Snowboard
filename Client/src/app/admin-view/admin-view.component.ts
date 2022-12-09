@@ -21,8 +21,7 @@ export class AdminViewComponent implements OnInit {
   constructor(private as:AdminserviceService) { }
 
   toggleLive(productID:number){
-    this.as.toggleLive(productID).subscribe( response =>{
-      console.log(response);
+    this.as.toggleLive(productID).subscribe( () =>{
     })
   }
 
@@ -30,8 +29,6 @@ export class AdminViewComponent implements OnInit {
   ngOnInit(): void {
     this.as.displayProducts().subscribe( products =>{
       this.products = products;
-
-     console.log(products);
     })
   }
 

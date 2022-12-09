@@ -3,21 +3,21 @@ import cors from 'cors';
 import mysql from 'mysql2';
 import 'dotenv/config';
 
-// const db = mysql.createConnection({
-//     host: 'localhost',
-//     port: 3306,
-//     user: 'root',
-//     password: '',
-//     database: 'snowboards'
-// });
-
-const db = mysql.createPool({
-    host: process.env.DBHOST,
-    port: process.env.DBPORT,
-    user: process.env.DBUSER,
-    password: process.env.DBPASSWORD,
-    database: process.env.DBDATABASE
+const db = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: '',
+    database: 'snowboards'
 });
+
+// const db = mysql.createPool({
+//     host: process.env.DBHOST,
+//     port: process.env.DBPORT,
+//     user: process.env.DBUSER,
+//     password: process.env.DBPASSWORD,
+//     database: process.env.DBDATABASE
+// });
 
 const server = express();
 

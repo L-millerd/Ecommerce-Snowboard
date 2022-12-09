@@ -1,4 +1,42 @@
-<div class="hero" [ngStyle]="{backgroundImage:'url(../assets/butter-assets/butter_snowboards_hero.jpg)'}">
+
+<!-- <app-b-nav></app-b-nav> -->
+<div class="hero" [ngStyle]="{backgroundImage:'url(../../assets/butter-assets/butter_snowboards_hero.jpg)'}">
+  <div id="overlay">
+    <h1 class="hero-text">Women's Boards</h1>
+    <div class="hero-text subhead">Find your ride or die board with Butter Boards. Serving the best selection in women's boards since 2007</div>
+  </div>
+</div>
+
+<div class="allContainer">
+
+  <div class="heading">Women's Snowboards
+    <p>Women’s snowboard options for park, all-mountain, powder, freestyle, and backcountry snowboards.</p>
+  </div>
+  <div class="filters">
+    <div class="filter" (click)="allProducts()">All</div>
+    <div class="filter" (click)="lowHigh()">Price: Lowest to Highest</div>
+    <div class="filter" (click)="highLow()">Price: Highest to Lowest</div>
+    <div class="filter" (click)="available()">Availability</div>
+  </div>
+
+
+  <div class="productRow row">
+    <div class="productCol col-sm-6 col-md-6 col-lg-4 col-xl-3" *ngFor="let item of womens">
+      <a [routerLink]="[item.id]">
+        <img class="productImg" [src]="item.image">
+        <h4 class="title">{{item.title}}</h4>
+        <div class="price">{{item.price | currency}}</div>
+        <div class="out-of-stock" *ngIf = "item.stock < 1">Out of stock</div>
+      </a>
+    </div>
+  </div>
+
+
+  <div class="footerClass">
+  </div>
+</div>
+
+<!-- <div class="hero" [ngStyle]="{backgroundImage:'url(../assets/butter-assets/butter_snowboards_hero.jpg)'}">
 </div>
 
 <div class="allContainer">
@@ -10,7 +48,6 @@
       <div class="price">{{item.price | currency}}</div>
       <div class="stock">{{item.stock}} Available</div>
       <div class="btnRow row">
-        <!-- <div class="heart col-3"></div> -->
         <a [routerLink]="['/womens', item.id]"><button class="addBtn col-9">View</button></a>
       </div>
     </div>
@@ -19,4 +56,4 @@
 
   <div class="footerClass">
   </div>
-</div>
+</div> -->

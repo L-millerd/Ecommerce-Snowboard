@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminserviceService } from '../services/adminservice.service';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../interfaces/products.interface';
+
 
 @Component({
   selector: 'app-admin-edit',
@@ -22,7 +22,6 @@ export class AdminEditComponent implements OnInit {
 
   deleted:Boolean = false;
   edited: Boolean = false;
-  online: Boolean = false;
 
   showEditMessage: string = "none";
   showDeleteMessage: string = "none";
@@ -36,7 +35,6 @@ export class AdminEditComponent implements OnInit {
     if(confirm("Are you sure? Deleting this product will be permanent")){
       let productID = this.route.snapshot.paramMap.get("id");
       this.as.deleteProduct(productID).subscribe( response =>{
-      // console.log(response);
       this.showDeleteMessage = "block";
       this.deleted = response.deleted;
       })
@@ -46,7 +44,6 @@ export class AdminEditComponent implements OnInit {
 
   editProduct(){
     let productID = this.route.snapshot.paramMap.get("id");
-    console.log(productID);
     this.as.editProduct(
       productID,
       this.image,
@@ -58,12 +55,12 @@ export class AdminEditComponent implements OnInit {
       this.description,
       this.price,
       this.stock).subscribe( response =>{
-        console.log(response);
         this.edited = response.edited;
         this.showEditMessage = "block";
         this.editError = response.message;
       })
   }
+
 
   ngOnInit(): void {
     let productID:any = this.route.snapshot.paramMap.get("id");
@@ -79,7 +76,6 @@ export class AdminEditComponent implements OnInit {
       this.description = singleProduct.description;
       this.price = singleProduct.price;
       this.stock = singleProduct.stock;
-      // console.log(this.singleProduct)
     });
 
   }
